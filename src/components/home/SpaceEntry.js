@@ -8,11 +8,12 @@ class SpaceEntry extends Component {
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.validateName = this.validateName.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.state = {
       editMode: false,
-      name: ""
+      spaceName: ""
     };
   }
 
@@ -20,21 +21,40 @@ class SpaceEntry extends Component {
     const { deleteSpace } = this.props;
     deleteSpace(id);
   }
-  handleToggle() {
+  handleToggle(name) {
     this.setState({
-      editMode: !this.state.editMode
+      editMode: !this.state.editMode,
+      spaceName: name
     });
   }
+  validateName(name) {
+    let result = true;
+    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{2,30}$/g;
+
+    if (name === "") {
+      alert("Workspace 이름을 입력해주세요");
+      result = false;
+    } else if (!nameReg.test(name)) {
+      alert("2자 이상 빈칸 없이 텍스트로 입력해주세요");
+      this.setState({ name: this.state.spaceName });
+      result = false;
+    }
+    return result;
+  }
   handleNameChange(e) {
-    this.setState({ name: e.target.value });
+    if (!this.validateName(e.target.value)) {
+      e.target.value = this.state.spaceName;
+    } else {
+      this.setState({ spaceName: e.target.value });
+    }
   }
   handleEdit(id) {
-    const { name } = this.state;
+    const { spaceName } = this.state;
     const { editSpace } = this.props;
-    editSpace(name, id);
+    editSpace(spaceName, id);
     this.setState({
       editMode: false,
-      name: ""
+      spaceName: ""
     });
   }
 
@@ -62,7 +82,7 @@ class SpaceEntry extends Component {
         <td>{space.id} Notes</td>
         <td>Modified {space.updateAt}</td>
         <td>
-          <button type="button" onClick={() => this.handleToggle()}>
+          <button type="button" onClick={() => this.handleToggle(space.name)}>
             Edit
           </button>
           <button type="button" onClick={() => this.handleDelete(space.id)}>

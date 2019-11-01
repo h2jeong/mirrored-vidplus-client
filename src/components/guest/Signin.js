@@ -24,22 +24,24 @@ class Signin extends Component {
       alert("비밀번호를 입력해주세요");
       return;
     }
-    this.props.history.push("/home");
-    // fetch("/user/signin", {
-    //   email: this.state.email,
-    //   password: this.state.password
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log("/signin : data::", data);
-    //     if (data === "Logged in.") {
-    //         this.props.history.push("/home");
-    //       } else {
-    //         alert("errorCode : " + data);
-    //       }
-    //     }
-    //   })
-    //   .catch(error => console.log(error));
+    // this.props.history.push("/home");
+    fetch("/user/signin", {
+      email: this.state.email,
+      password: this.state.password
+    })
+      .then(response => {
+        if (response.status === 200) {
+          response.json();
+        } else if (response.status === 500) {
+          alert("왜 로그인이 안될까요?" + response.statusText);
+          console.log("signup 500::", response.statusText);
+        }
+      })
+      .then(data => {
+        console.log("/signin : data::", data);
+        this.props.history.push("/home");
+      })
+      .catch(error => console.log(error));
   }
 
   handleEmailChange(e) {
@@ -85,18 +87,4 @@ class Signin extends Component {
   }
 }
 
-// const signOut = () => {
-//   fetch("/user/signout")
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log("/signout : data::", data);
-//       if (data === "Logged out.") {
-//         // siginin으로 보내기
-//         this.props.history.push("/signin");
-//       } else {
-//         alert("errorCode : " + data);
-//       }
-//     })
-//     .catch(error => console.log(error));
-// };
 export default Signin;

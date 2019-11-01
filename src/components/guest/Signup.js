@@ -59,25 +59,28 @@ class Signup extends Component {
   }
 
   signUp() {
-    //const { name, email, password } = this.state;
+    const { name, email, password } = this.state;
     if (this.vaildCheck()) {
-      this.props.history.push("/signin");
+      // this.props.history.push("/signin");
 
-      // fetch("/user/signup", {
-      //   name: name,
-      //   email: email,
-      //   password: password
-      // })
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     console.log("/user/signup response::", data);
-      //     if (data === "") {
-      //       this.props.history.push("/signin");
-      //     } else {
-      //       alert("errorCode : " + data);
-      //     }
-      //   })
-      //   .catch(error => console.log(error));
+      fetch("/user/signup", {
+        name: name,
+        email: email,
+        password: password
+      })
+        .then(response => {
+          if (response.status === 201) {
+            response.json();
+          } else if (response.status === 500) {
+            alert("왜 가입이 안될까요?");
+            console.log("signup 500::", response.statusText);
+          }
+        })
+        .then(data => {
+          console.log("/user/signup response::", data);
+          this.props.history.push("/signin");
+        })
+        .catch(error => console.log(error));
     }
   }
   handleNameChange(e) {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import SpaceAdder from "./SpaceAdder";
 import SpaceList from "./SpaceList";
+import Signout from "../guest/Signout";
 
 class Table extends Component {
   render() {
@@ -9,6 +10,7 @@ class Table extends Component {
 
     return (
       <div>
+        <Signout />
         <h2>My Workspaces</h2>
         <SpaceAdder />
         <SpaceList spaces={spaces} />

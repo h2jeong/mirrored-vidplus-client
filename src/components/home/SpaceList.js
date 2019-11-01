@@ -2,9 +2,13 @@ import React from "react";
 import SpaceEntry from "./SpaceEntry";
 
 const SpaceList = ({ spaces }) => {
-  const spaceList = spaces.map(space => (
-    <SpaceEntry space={space} key={space.id} />
-  ));
+  const spaceList = spaces ? (
+    spaces.map(space => <SpaceEntry space={space} key={space.id} />)
+  ) : (
+    <tr>
+      <td colspan="4">{"There is no WorkSpace"}</td>
+    </tr>
+  );
 
   return (
     <div>
