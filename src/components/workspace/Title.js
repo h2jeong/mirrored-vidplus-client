@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Signout from "../shared/Signout";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Typography, Select, Col, PageHeader } from "antd";
@@ -42,24 +43,29 @@ class Title extends Component {
       const itemRender = route => <Link to={route.path}>{route.name}</Link>;
 
       return (
-        <PageHeader breadcrumb={{ itemRender, routes }}>
-          <Col style={{ display: "inline-block", width: "170px" }}>
-            <Heading level={2}>Workspace:</Heading>
-          </Col>
-          <Col className="workspace-select-div">
-            <Select
-              value={this.props.spaceName}
-              onSelect={this.onSpaceChange}
-              style={{ width: "100%" }}
-            >
-              {this.props.spaces.map(space => (
-                <Option value={space.name} key={space.id}>
-                  {space.name}
-                </Option>
-              ))}
-            </Select>
-          </Col>
-        </PageHeader>
+        <div style={{ position: "relative" }}>
+          <div style={{ position: "absolute", right: "0" }}>
+            <Signout changeAuthState={this.props.changeAuthState} />
+          </div>
+          <PageHeader breadcrumb={{ itemRender, routes }}>
+            <Col style={{ display: "inline-block", width: "170px" }}>
+              <Heading level={2}>Workspace:</Heading>
+            </Col>
+            <Col className="workspace-select-div">
+              <Select
+                value={this.props.spaceName}
+                onSelect={this.onSpaceChange}
+                style={{ width: "100%" }}
+              >
+                {this.props.spaces.map(space => (
+                  <Option value={space.name} key={space.id}>
+                    {space.name}
+                  </Option>
+                ))}
+              </Select>
+            </Col>
+          </PageHeader>
+        </div>
       );
     }
   }

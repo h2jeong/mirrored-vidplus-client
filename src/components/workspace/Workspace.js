@@ -46,7 +46,10 @@ class Workspace extends Component {
       return (
         <Layout style={{ padding: "24px 24px 24px 24px" }}>
           <Content style={{ background: "white", padding: "16px 24px" }}>
-            <Title spaceName={this.props.match.params.spaceName} />
+            <Title
+              spaceName={this.props.match.params.spaceName}
+              changeAuthState={this.props.changeAuthState}
+            />
             <Row gutter={[16, 16]}>
               <Col span={12}>
                 <VideoPlayer currSpace={currSpace} />
