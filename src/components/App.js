@@ -67,7 +67,13 @@ class App extends Component {
                 <Home {...props} changeAuthState={this.changeAuthState} />
               )}
             />
-            <Route path="/spaces/:spaceName" component={Workspace} />
+            <Route
+              path="/spaces/:spaceName"
+              render={props => (
+                // Signout버튼을 위해 changeAuthState를 prop으로 넘겨준다
+                <Workspace {...props} changeAuthState={this.changeAuthState} />
+              )}
+            />
           </Switch>
         </Layout>
       );

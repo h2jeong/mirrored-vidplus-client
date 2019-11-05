@@ -95,6 +95,11 @@ class Navigation extends Component {
               <span style={{ paddingLeft: "3px" }}>My Info</span>
             </Menu.Item>
           </Menu>
+          <img
+            alt=""
+            className="nav-logo"
+            src={require("../../styles/ci.png")}
+          />
         </Sider>
       );
     }
