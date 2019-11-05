@@ -25,7 +25,12 @@ class SignOut extends Component {
 
   render() {
     return (
-      <Button type="button" onClick={this.signOut.bind(this)} icon="logout">
+      <Button
+        type="button"
+        onClick={this.signOut.bind(this)}
+        icon="logout"
+        style={{ zIndex: "999" }}
+      >
         Logout
       </Button>
     );
