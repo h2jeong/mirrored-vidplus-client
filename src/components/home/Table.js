@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import SpaceAdder from "./SpaceAdder";
 import SpaceList from "./SpaceList";
-import Signout from "../guest/Signout";
+import Signout from "../shared/Signout";
 import { Typography, Col, PageHeader } from "antd";
 
 const Heading = Typography.Title;
