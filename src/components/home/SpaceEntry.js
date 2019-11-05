@@ -51,13 +51,13 @@ class SpaceEntry extends Component {
   }
   validateName(name) {
     let result = true;
-    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{2,30}$/g;
+    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{1,30}$/g;
 
     if (name === "") {
       alert("Workspace 이름을 입력해주세요");
       result = false;
     } else if (!nameReg.test(name)) {
-      alert("2자 이상 빈칸 없이 텍스트로 입력해주세요");
+      alert("빈칸 없이 텍스트로 입력해주세요");
       this.setState({ name: this.state.spaceName });
       result = false;
     } else if (!this.duplicateCheck(name)) {

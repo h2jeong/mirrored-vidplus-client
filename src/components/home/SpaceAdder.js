@@ -28,7 +28,7 @@ class SpaceAdder extends Component {
   vaildCheck() {
     let result = true;
     const { url, name } = this.state;
-    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{2,30}$/g;
+    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{1,30}$/g;
     if (name === "") {
       this.setState({
         txtWarning: "Workspace 이름을 입력해주세요"
@@ -36,8 +36,8 @@ class SpaceAdder extends Component {
       result = false;
     } else if (!nameReg.test(name)) {
       this.setState({
-        txtWarning: "2자 이상 빈칸 없이 텍스트로 입력해주세요",
-        name: ""
+        name: "",
+        txtWarning: "빈칸 없이 텍스트로 입력해주세요"
       });
       result = false;
     } else if (!this.duplicateCheck(name)) {
