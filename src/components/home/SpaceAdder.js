@@ -6,6 +6,7 @@ import { Input, Button } from "antd";
 class SpaceAdder extends Component {
   constructor(props) {
     super(props);
+    this.duplicateCheck = this.duplicateCheck.bind(this);
     this.vaildCheck = this.vaildCheck.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleUrlChange = this.handleUrlChange.bind(this);
@@ -16,11 +17,17 @@ class SpaceAdder extends Component {
       txtWarning: ""
     };
   }
-
+  duplicateCheck(name) {
+    const { spaces } = this.props;
+    let result = true;
+    for (let i = 0; i < spaces.length; i++) {
+      if (spaces[i].name === name) return false;
+    }
+    return result;
+  }
   vaildCheck() {
     let result = true;
     const { url, name } = this.state;
-
     const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{2,30}$/g;
     if (name === "") {
       this.setState({
@@ -32,6 +39,10 @@ class SpaceAdder extends Component {
         txtWarning: "2자 이상 빈칸 없이 텍스트로 입력해주세요",
         name: ""
       });
+      result = false;
+    } else if (!this.duplicateCheck(name)) {
+      alert("이미 등록된 Workspace 이름이 있습니다.");
+      this.setState({ name: this.state.spaceName });
       result = false;
     }
 
@@ -58,7 +69,7 @@ class SpaceAdder extends Component {
       });
       result = false;
     }
-    console.log("validate::", result);
+
     return result;
   }
   handleUrlChange(e) {
@@ -117,14 +128,18 @@ class SpaceAdder extends Component {
     );
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    spaces: state.spaces
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     addSpace: space => dispatch(addSpace(space))
   };
 };
 SpaceAdder = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SpaceAdder);
 export default SpaceAdder;

@@ -1,0 +1,8 @@
+html,
+body {
+  background-color: #0f1727;
+}
+#root {
+  background-color: #0f1727;
+  color: rgba(255, 255, 255, 0.65);
+}
