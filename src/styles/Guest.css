@@ -1,0 +1,9 @@
+.bgGuest {
+  margin: 120px auto;
+  width: 880px;
+  height: 500px;
+  border: 1px solid #eee;
+  padding: 20px 20px 20px 420px;
+  background: no-repeat url("./bg01.png") #f9f9f9;
+  background-size: contain;
+}

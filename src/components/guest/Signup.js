@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "../../api";
+import "../../styles/Guest.css";
 
 class Signup extends Component {
   constructor(props) {
@@ -134,7 +135,7 @@ class Signup extends Component {
     //   this.authUser();
     // }
     return (
-      <div>
+      <div className="bgGuest">
         <form className="form-signin">
           <h2>Sign Up</h2>
           <label for="inputName">Name</label>

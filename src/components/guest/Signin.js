@@ -81,7 +81,7 @@ class Signin extends Component {
       this.props.history.push("/home");
     }
     return (
-      <div>
+      <div className="bgGuest">
         <form className="form-signin">
           <h2>Sign In</h2>
           <label for="inputEmail">Email</label>
