@@ -1,0 +1,13 @@
+@media all and (max-height: 40em) {
+  .nav-logo {
+    display: none;
+  }
+}
+
+.nav-logo {
+  position: absolute;
+  transform: rotate(-90deg);
+  height: 40px;
+  bottom: 130px;
+  left: -30px;
+}
