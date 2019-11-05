@@ -1,14 +1,14 @@
 .formSpaceAdd {
   width: 100%;
   display: flex;
-  margin: 10px 0 45px;
+  margin: 10px 0;
 }
 .formSpaceAdd input[type="text"] {
   margin-right: 1%;
 }
-/* .txtWarning {
-  display: block;
-} */
+.txtWarning {
+  color: #f5222d;
+}
 .formEditSpaceName button {
   margin-left: 8px;
 }

@@ -36,9 +36,10 @@ class SpaceAdder extends Component {
     }
 
     //const urlReg = /(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
-    const youTubeRegs = [
+    const urlRegs = [
       /https?:\/\/youtu.be\/([a-zA-Z0-9\-_]+)/gi,
-      /https?:\/\/www.youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)/gi
+      /https?:\/\/www.youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)/gi,
+      /(https?:\/\/)?(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/gi
     ];
 
     if (url === "") {
@@ -46,7 +47,11 @@ class SpaceAdder extends Component {
         txtWarning: "url을 입력해주세요"
       });
       result = false;
-    } else if (!youTubeRegs[0].test(url) && !youTubeRegs[1].test(url)) {
+    } else if (
+      !urlRegs[0].test(url) &&
+      !urlRegs[1].test(url) &&
+      !urlRegs[2].test(url)
+    ) {
       this.setState({
         txtWarning: "url 형식에 맞게 입력해주세요",
         url: ""

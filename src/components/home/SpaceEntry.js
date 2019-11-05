@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteSpace, editSpace } from "../../actions/creators";
 import { Input, Button } from "antd";
+
 const ButtonGroup = Button.Group;
 
 class SpaceEntry extends Component {
@@ -26,7 +27,8 @@ class SpaceEntry extends Component {
   handleToggle(name) {
     this.setState({
       editMode: !this.state.editMode,
-      spaceName: name
+      spaceName: name,
+      getNotes: 0
     });
   }
   validateName(name) {
@@ -61,7 +63,8 @@ class SpaceEntry extends Component {
   }
 
   render() {
-    const { space } = this.props;
+    const { space, notes } = this.props;
+    const getNotes = notes.filter(note => space.id === note.space_id);
     const { editMode } = this.state;
     let spaceName = editMode ? (
       <form className="formEditSpaceName">
@@ -86,7 +89,7 @@ class SpaceEntry extends Component {
     return (
       <tr>
         <td>{spaceName}</td>
-        <td>{space.id} Notes</td>
+        <td>{getNotes.length} Notes</td>
         <td className="modifiedTime">Modified: {space.updatedAt}</td>
         <td className="btnArea">
           <ButtonGroup>
@@ -108,7 +111,11 @@ class SpaceEntry extends Component {
     );
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    notes: state.notes
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     deleteSpace: id => dispatch(deleteSpace(id)),
@@ -116,7 +123,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 SpaceEntry = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SpaceEntry);
 export default SpaceEntry;
