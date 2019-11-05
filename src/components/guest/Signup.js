@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "../../styles/Guest.css";
 import api from "../../api";
+import { Icon, Input, Button } from "antd";
 
 class Signup extends Component {
   constructor(props) {
@@ -92,7 +94,6 @@ class Signup extends Component {
         password: password
       })
         .then(data => {
-          console.log("/user/signup response::", data);
           this.props.history.push("/signin");
         })
         .catch(error => {
@@ -134,53 +135,77 @@ class Signup extends Component {
     //   this.authUser();
     // }
     return (
-      <div>
+      <div className="bgGuest">
         <form className="form-signin">
-          <h2>Sign Up</h2>
-          <label for="inputName">Name</label>
-          <input
+          <Input
             type="name"
             onChange={this.handleNameChange}
-            id="inputName"
-            maxlength="10"
-            placeholder="이름"
+            size="large"
+            prefix={
+              <Icon
+                type="user"
+                style={{
+                  color: " rgba(255, 255, 255, 0.4)"
+                }}
+              />
+            }
+            placeholder="Username"
             required
             autoFocus
           />
-          <label for="inputEmail">Email</label>
-          <input
+          <Input
             type="email"
             onChange={this.handleEmailChange}
-            id="inputEmail"
+            size="large"
+            prefix={
+              <Icon
+                type="mail"
+                style={{ color: " rgba(255, 255, 255, 0.4)" }}
+              />
+            }
             autocomplete="off"
-            placeholder="이메일"
+            placeholder="Email Address"
             required
           />
-          <label for="inputPassword">Password</label>
-          <input
+          <Input
             type="password"
             onChange={this.handlePWChange}
-            id="inputPassword"
-            maxlength="12"
-            placeholder="비밀번호 영문, 숫자, 특수문자 조합 8~12자"
+            size="large"
+            prefix={
+              <Icon
+                type="lock"
+                style={{ color: " rgba(255, 255, 255, 0.4)" }}
+              />
+            }
+            placeholder="Password"
             required
           />
-          <label for="inputPassword">Password Again</label>
-          <input
+          <Input
             type="password"
             onChange={this.handlePW2Change}
-            id="inputPassword2"
-            maxlength="12"
-            placeholder="비밀번호 다시 입력"
+            size="large"
+            prefix={
+              <Icon
+                type="lock"
+                style={{ color: " rgba(255, 255, 255, 0.4)" }}
+              />
+            }
+            placeholder="Password Again"
             required
           />
-          <button type="button" onClick={this.signUp}>
+          <Button
+            type="primary"
+            size="large"
+            onClick={this.signUp}
+            className="btnSign"
+            icon="idcard"
+          >
             Sign up
-          </button>
-          <p id="txtWarning">{this.state.txtWarning}</p>
+          </Button>
+          <p className="txtWarning">{this.state.txtWarning}</p>
           {/* 회원 가입시 에러 메세지 */}
         </form>
-        <div>
+        <div className="linkTo">
           <Link to="/signin">{"Signin"}</Link>
         </div>
       </div>

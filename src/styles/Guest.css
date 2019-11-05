@@ -1,0 +1,59 @@
+.bgGuest {
+  margin: 300px auto;
+  width: 900px;
+  padding-left: 400px;
+  background: no-repeat url("./ci.png");
+  background-size: 350px auto;
+  background-position: left calc(50% - 20px);
+}
+.form-signin .txtWarning {
+  color: rgba(18, 197, 137, 0.5);
+}
+.form-signin {
+  /* min-height: 280px; */
+  padding-left: 100px;
+  margin: 50px 50px 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+.form-signin input {
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  margin-bottom: 15px;
+}
+.btnSign {
+  width: 100%;
+  margin: 10px 0;
+  background-color: #4a8a7c;
+  border-color: #4a8a7c;
+}
+.btnSign:hover,
+.btnSign.focus,
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background-color: #056d5d;
+  border-color: #056d5d;
+}
+.linkTo {
+  text-align: right;
+  padding-right: 50px;
+  font-size: 1.2em;
+}
+.linkTo a,
+.linkTo a:hover,
+.linkTo a:visited {
+  color: rgba(255, 255, 255, 0.7);
+}
+.form-signin .ant-input-prefix {
+  display: -ms-flexbox;
+  display: flex;
+  top: 38%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.ant-btn-background-ghost {
+  display: none;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}

@@ -6,6 +6,7 @@ import { Input, Button } from "antd";
 class SpaceAdder extends Component {
   constructor(props) {
     super(props);
+    this.duplicateCheck = this.duplicateCheck.bind(this);
     this.vaildCheck = this.vaildCheck.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleUrlChange = this.handleUrlChange.bind(this);
@@ -16,12 +17,18 @@ class SpaceAdder extends Component {
       txtWarning: ""
     };
   }
-
+  duplicateCheck(name) {
+    const { spaces } = this.props;
+    let result = true;
+    for (let i = 0; i < spaces.length; i++) {
+      if (spaces[i].name === name) return false;
+    }
+    return result;
+  }
   vaildCheck() {
     let result = true;
     const { url, name } = this.state;
-
-    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{2,30}$/g;
+    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{1,30}$/g;
     if (name === "") {
       this.setState({
         txtWarning: "Workspace 이름을 입력해주세요"
@@ -29,16 +36,21 @@ class SpaceAdder extends Component {
       result = false;
     } else if (!nameReg.test(name)) {
       this.setState({
-        txtWarning: "2자 이상 빈칸 없이 텍스트로 입력해주세요",
-        name: ""
+        name: "",
+        txtWarning: "빈칸 없이 텍스트로 입력해주세요"
       });
+      result = false;
+    } else if (!this.duplicateCheck(name)) {
+      alert("이미 등록된 Workspace 이름이 있습니다.");
+      this.setState({ name: this.state.spaceName });
       result = false;
     }
 
     //const urlReg = /(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
-    const youTubeRegs = [
+    const urlRegs = [
       /https?:\/\/youtu.be\/([a-zA-Z0-9\-_]+)/gi,
-      /https?:\/\/www.youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)/gi
+      /https?:\/\/www.youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)/gi,
+      /(https?:\/\/)?(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/gi
     ];
 
     if (url === "") {
@@ -46,14 +58,18 @@ class SpaceAdder extends Component {
         txtWarning: "url을 입력해주세요"
       });
       result = false;
-    } else if (!youTubeRegs[0].test(url) && !youTubeRegs[1].test(url)) {
+    } else if (
+      !urlRegs[0].test(url) &&
+      !urlRegs[1].test(url) &&
+      !urlRegs[2].test(url)
+    ) {
       this.setState({
         txtWarning: "url 형식에 맞게 입력해주세요",
         url: ""
       });
       result = false;
     }
-    console.log("validate::", result);
+
     return result;
   }
   handleUrlChange(e) {
@@ -112,14 +128,18 @@ class SpaceAdder extends Component {
     );
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    spaces: state.spaces
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     addSpace: space => dispatch(addSpace(space))
   };
 };
 SpaceAdder = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SpaceAdder);
 export default SpaceAdder;

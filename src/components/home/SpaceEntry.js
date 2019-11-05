@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteSpace, editSpace } from "../../actions/creators";
 import { Input, Button } from "antd";
+import api from "../../api";
+
 const ButtonGroup = Button.Group;
 
 class SpaceEntry extends Component {
   constructor(props) {
     super(props);
+    this.duplicateCheck = this.duplicateCheck.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.validateName = this.validateName.bind(this);
@@ -15,8 +18,17 @@ class SpaceEntry extends Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.state = {
       editMode: false,
-      spaceName: ""
+      spaceName: "",
+      noteLength: 0
     };
+  }
+  componentDidMount() {
+    const { space } = this.props;
+    api(`notes?space_id=${space.id}`, "GET")
+      .then(data => {
+        this.setState({ noteLength: data.length });
+      })
+      .catch(error => console.error(error));
   }
 
   handleDelete(id) {
@@ -29,15 +41,27 @@ class SpaceEntry extends Component {
       spaceName: name
     });
   }
+  duplicateCheck(name) {
+    const { spaces } = this.props;
+    let result = true;
+    for (let i = 0; i < spaces.length; i++) {
+      if (spaces[i].name === name) return false;
+    }
+    return result;
+  }
   validateName(name) {
     let result = true;
-    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{2,30}$/g;
+    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{1,30}$/g;
 
     if (name === "") {
       alert("Workspace 이름을 입력해주세요");
       result = false;
     } else if (!nameReg.test(name)) {
-      alert("2자 이상 빈칸 없이 텍스트로 입력해주세요");
+      alert("빈칸 없이 텍스트로 입력해주세요");
+      this.setState({ name: this.state.spaceName });
+      result = false;
+    } else if (!this.duplicateCheck(name)) {
+      alert("이미 등록된 Workspace 이름이 있습니다.");
       this.setState({ name: this.state.spaceName });
       result = false;
     }
@@ -62,7 +86,7 @@ class SpaceEntry extends Component {
 
   render() {
     const { space } = this.props;
-    const { editMode } = this.state;
+    const { editMode, noteLength } = this.state;
     let spaceName = editMode ? (
       <form className="formEditSpaceName">
         <Input
@@ -86,7 +110,7 @@ class SpaceEntry extends Component {
     return (
       <tr>
         <td>{spaceName}</td>
-        <td>{space.id} Notes</td>
+        <td>{noteLength} Notes</td>
         <td className="modifiedTime">Modified: {space.updatedAt}</td>
         <td className="btnArea">
           <ButtonGroup>
@@ -108,7 +132,11 @@ class SpaceEntry extends Component {
     );
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    spaces: state.spaces
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     deleteSpace: id => dispatch(deleteSpace(id)),
@@ -116,7 +144,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 SpaceEntry = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SpaceEntry);
 export default SpaceEntry;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "../../api";
+import { Icon, Input, Button } from "antd";
 
 class Signin extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class Signin extends Component {
     this.signIn = this.signIn.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePWChange = this.handlePWChange.bind(this);
-    this.googleSignIn = this.googleSignIn.bind(this);
+    this.ggSignIn = this.ggSignIn.bind(this);
     this.state = {
       email: "",
       password: "",
@@ -20,17 +21,20 @@ class Signin extends Component {
     // alert("Email : " + this.state.email + " Password : ", this.state.password);
     const { email, password } = this.state;
     if (email === "") {
-      alert("이메일을 입력해주세요.");
+      this.setState({
+        txtWarning: "이메일을 입력해주세요."
+      });
       return;
     }
     if (password === "") {
-      alert("비밀번호를 입력해주세요");
+      this.setState({
+        txtWarning: "비밀번호를 입력해주세요"
+      });
       return;
     }
 
     api("user/signin", "POST", { email, password })
       .then(data => {
-        console.log("/signin : data::", data);
         this.props.changeAuthState(() => this.props.history.push("/home"));
       })
       .catch(error => {
@@ -54,23 +58,13 @@ class Signin extends Component {
     this.setState({ password: e.target.value });
   }
 
-  googleSignIn() {
-    api("google/signin", "POST")
+  ggSignIn() {
+    api("/auth/google", "POST")
       .then(data => {
-        console.log("/signin : data::", data);
         this.props.changAuthState(() => this.props.history.push("/home"));
       })
       .catch(error => {
-        const { status, message } = error;
-
-        if (status === 400) {
-          alert(message);
-        } else if (status === 401) {
-          this.setState({ txtWarning: message });
-        } else if (status === 500) {
-          this.setState({ txtWarning: message });
-          alert("고객센터로 문의 바랍니다.");
-        }
+        console.error(error);
       });
   }
 
@@ -81,37 +75,51 @@ class Signin extends Component {
       this.props.history.push("/home");
     }
     return (
-      <div>
+      <div className="bgGuest">
         <form className="form-signin">
-          <h2>Sign In</h2>
-          <label for="inputEmail">Email</label>
-          <input
+          <Input
             type="email"
             onChange={this.handleEmailChange}
-            id="inputEmail"
+            size="large"
+            prefix={
+              <Icon
+                type="mail"
+                style={{ color: " rgba(255, 255, 255, 0.4)" }}
+              />
+            }
             placeholder="Email address"
             required
+            autoFocus
           />
-          <label type="inputPassword">Password</label>
-          <input
+          <Input
             type="password"
             onChange={this.handlePWChange}
-            id="inputPassword"
+            size="large"
+            prefix={
+              <Icon
+                type="lock"
+                style={{ color: " rgba(255, 255, 255, 0.4)" }}
+              />
+            }
             placeholder="Password"
             required
           />
-          <button type="button" onClick={this.signIn}>
+          <Button
+            type="primary"
+            size="large"
+            onClick={this.signIn}
+            className="btnSign"
+            icon="login"
+          >
             Sign in
-          </button>
-          <p id="txtWarning">{this.state.txtWarning}</p>
+          </Button>
+          <p className="txtWarning">{this.state.txtWarning}</p>
+          <Button ghost size="small" onClick={this.ggSignIn} icon="google">
+            Account Sign In
+          </Button>
         </form>
-        <div>
+        <div className="linkTo">
           <Link to="/signup">{"Signup"}</Link>
-        </div>
-        <div>
-          <button type="button" onClick={this.googleSignIn}>
-            Google Sign in
-          </button>
         </div>
       </div>
     );
