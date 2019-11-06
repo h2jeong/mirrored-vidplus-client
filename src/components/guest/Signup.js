@@ -136,77 +136,91 @@ class Signup extends Component {
     // }
     return (
       <div className="bgGuest">
-        <form className="form-signin">
-          <Input
-            type="name"
-            onChange={this.handleNameChange}
-            size="large"
-            prefix={
-              <Icon
-                type="user"
-                style={{
-                  color: " rgba(255, 255, 255, 0.4)"
-                }}
-              />
-            }
-            placeholder="Username"
-            required
-            autoFocus
-          />
-          <Input
-            type="email"
-            onChange={this.handleEmailChange}
-            size="large"
-            prefix={
-              <Icon
-                type="mail"
-                style={{ color: " rgba(255, 255, 255, 0.4)" }}
-              />
-            }
-            autocomplete="off"
-            placeholder="Email Address"
-            required
-          />
-          <Input
-            type="password"
-            onChange={this.handlePWChange}
-            size="large"
-            prefix={
-              <Icon
-                type="lock"
-                style={{ color: " rgba(255, 255, 255, 0.4)" }}
-              />
-            }
-            placeholder="Password"
-            required
-          />
-          <Input
-            type="password"
-            onChange={this.handlePW2Change}
-            size="large"
-            prefix={
-              <Icon
-                type="lock"
-                style={{ color: " rgba(255, 255, 255, 0.4)" }}
-              />
-            }
-            placeholder="Password Again"
-            required
-          />
-          <Button
-            type="primary"
-            size="large"
-            onClick={this.signUp}
-            className="btnSign"
-            icon="idcard"
-          >
-            Sign up
-          </Button>
-          <p className="txtWarning">{this.state.txtWarning}</p>
-          {/* 회원 가입시 에러 메세지 */}
-        </form>
-        <div className="linkTo">
-          <Link to="/signin">{"Signin"}</Link>
+        <div className="welcomeRight">
+          <form className="form-signin">
+            <Input
+              type="name"
+              onChange={this.handleNameChange}
+              size="large"
+              prefix={
+                <Icon
+                  type="user"
+                  style={{
+                    color: " rgba(255, 255, 255, 0.4)"
+                  }}
+                />
+              }
+              placeholder="Username"
+              required
+              autoFocus
+            />
+            <Input
+              type="email"
+              onChange={this.handleEmailChange}
+              size="large"
+              prefix={
+                <Icon
+                  type="mail"
+                  style={{ color: " rgba(255, 255, 255, 0.4)" }}
+                />
+              }
+              autocomplete="off"
+              placeholder="Email Address"
+              required
+            />
+            <Input
+              type="password"
+              onChange={this.handlePWChange}
+              size="large"
+              prefix={
+                <Icon
+                  type="lock"
+                  style={{ color: " rgba(255, 255, 255, 0.4)" }}
+                />
+              }
+              placeholder="Password"
+              required
+            />
+            <Input
+              type="password"
+              onChange={this.handlePW2Change}
+              size="large"
+              prefix={
+                <Icon
+                  type="lock"
+                  style={{ color: " rgba(255, 255, 255, 0.4)" }}
+                />
+              }
+              placeholder="Password Again"
+              required
+            />
+            <Button
+              type="primary"
+              size="large"
+              onClick={this.signUp}
+              className="btnSign"
+              icon="swap-right"
+            >
+              Sign up
+            </Button>
+            <p className="txtWarning">{this.state.txtWarning}</p>
+            {/* 회원 가입시 에러 메세지 */}
+          </form>
+          <div className="social">
+            <Button
+              size="small"
+              icon="google"
+              href="http://metawig.com:8080/auth/google"
+            >
+              Signup with google
+            </Button>
+            {/* <Button size="small" icon="facebook" href="#">
+              Signup with facebook
+            </Button> */}
+          </div>
+          <div className="linkTo">
+            <Link to="/signin">{"Signin"}</Link>
+          </div>
         </div>
       </div>
     );
