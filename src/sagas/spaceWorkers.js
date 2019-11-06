@@ -5,7 +5,6 @@ import {
   ADD_SPACE_ASYNC,
   EDIT_SPACE_ASYNC,
   DELETE_SPACE_ASYNC,
-  SELECT_SPACE_ASYNC,
   ADD_ERROR
 } from "../actions/types";
 
@@ -47,16 +46,6 @@ export function* deleteSpaceAsync(action) {
     const id = action.id;
     yield call(api, `spaces/${id}`, "DELETE");
     yield put({ type: DELETE_SPACE_ASYNC, id: id });
-  } catch (error) {
-    yield put({ type: ADD_ERROR, error });
-  }
-}
-
-export function* selectSpaceAsync(action) {
-  try {
-    const id = action.id;
-    yield call(api, `spaces/${id}`, "GET");
-    yield put({ type: SELECT_SPACE_ASYNC, id: id });
   } catch (error) {
     yield put({ type: ADD_ERROR, error });
   }

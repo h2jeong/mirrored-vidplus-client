@@ -3,7 +3,7 @@ import {
   ADD_SPACE_ASYNC,
   EDIT_SPACE_ASYNC,
   DELETE_SPACE_ASYNC,
-  SELECT_SPACE_ASYNC
+  SELECT_SPACE
 } from "../actions/types";
 
 export default function spaces(state = [], action) {
@@ -20,7 +20,7 @@ export default function spaces(state = [], action) {
       });
     case DELETE_SPACE_ASYNC:
       return state.filter(space => space.id !== action.id);
-    case SELECT_SPACE_ASYNC:
+    case SELECT_SPACE:
       return state.map(space => {
         if (space.id === action.id) {
           // 새로운 current space를 지정해준다
