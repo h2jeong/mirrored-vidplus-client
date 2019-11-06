@@ -118,6 +118,7 @@ class Signin extends Component {
             Account Sign In
           </Button>
         </form>
+        <a href="http://metawig.com:8080/auth/google">Oauth</a>
         <div className="linkTo">
           <Link to="/signup">{"Signup"}</Link>
         </div>
