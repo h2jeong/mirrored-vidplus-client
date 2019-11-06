@@ -59,25 +59,25 @@ class Signup extends Component {
     const emailReg = /^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+(\.[a-zA-Z0-9]+)+)*$/g;
     if (email === "") {
       this.setState({
-        txtWarning: "이메일을 입력해주세요"
+        txtWarning: "이메일을 입력해주세요."
       });
       result = false;
     } else if (!emailReg.test(email)) {
       this.setState({
-        txtWarning: "이메일 형식에 맞게 입력해주세요"
+        txtWarning: "이메일 형식에 맞게 입력해주세요."
       });
       result = false;
     }
 
-    const nameReg = /^[가-힣]{2,10}$/g;
+    const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|*]+$/g;
     if (name === "") {
       this.setState({
-        txtWarning: "이름을 입력해주세요"
+        txtWarning: "사용자 이름을 입력해주세요."
       });
       result = false;
     } else if (!nameReg.test(name)) {
       this.setState({
-        txtWarning: "한글로 입력해주세요"
+        txtWarning: "한글 또는 영어와 숫자로 입력해주세요."
       });
       result = false;
     }
