@@ -1,5 +1,8 @@
 .bgGuest {
-  margin: 290px auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 900px;
   padding-left: 400px;
   background: no-repeat url("./ci.png");
