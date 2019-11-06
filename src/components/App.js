@@ -14,6 +14,7 @@ import Signin from "./guest/Signin";
 import Signup from "./guest/Signup";
 import Home from "./home/Home";
 import Navigation from "./shared/Navigation";
+import Error from "./shared/Error";
 import { ADD_SPACES, ADD_NOTES, REMOVE_ERROR } from "../actions/types";
 import api from "../api";
 
@@ -74,6 +75,8 @@ class App extends Component {
                 <Workspace {...props} changeAuthState={this.changeAuthState} />
               )}
             />
+            {/* 맞는 path가 없으면, 404 페이지를 보여준다. */}
+            <Route component={Error} />
           </Switch>
         </Layout>
       );
@@ -107,9 +110,8 @@ class App extends Component {
               />
             )}
           />
-          {/* (인증 여부에 따라) renderPage로 인해 /signin으로 redirect되거나, /home 또는 /spaces가 뜸 */}
-          <Route path="/(home|spaces)/" render={renderPage} />
-          <Route>404: No Match</Route>
+          {/* (인증 여부에 따라) renderPage로 인해 /signin으로 redirect되거나, /home, /spaces, 또는 404가 뜸 */}
+          <Route render={renderPage} />
         </Switch>
       </Router>
     );

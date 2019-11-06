@@ -4,6 +4,27 @@
   }
 }
 
+@media all and (max-height: 35em) {
+  .error-img {
+    display: none;
+  }
+}
+
+.error-img {
+  position: relative;
+  top: 25%;
+}
+
+.error-img img {
+  height: 300px;
+}
+
+.error-button {
+  position: relative;
+  margin-top: 10px;
+  top: 25%;
+}
+
 .nav-logo {
   position: absolute;
   transform: rotate(-90deg);
