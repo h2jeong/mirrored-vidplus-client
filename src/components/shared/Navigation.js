@@ -74,7 +74,12 @@ class Navigation extends Component {
     if (this.state.redirect.awaiting) {
       return <Redirect to={this.state.redirect.path}></Redirect>;
     } else {
-      let itemKey = this.props.path.includes("/home") ? "1" : "2";
+      let itemKey = "";
+      if (this.props.path === "/home") {
+        itemKey = "1";
+      } else if (this.props.path.startsWith("/spaces")) {
+        itemKey = "2";
+      }
       return (
         <Sider
           collapsible
