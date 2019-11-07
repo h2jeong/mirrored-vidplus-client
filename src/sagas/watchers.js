@@ -1,10 +1,9 @@
-import { takeLatest, takeEvery, all } from "redux-saga/effects";
+import { takeEvery, all } from "redux-saga/effects";
 import {
   ADD_SPACES,
   ADD_SPACE,
   EDIT_SPACE,
   DELETE_SPACE,
-  SELECT_SPACE,
   ADD_NOTES,
   ADD_NOTE,
   EDIT_NOTE,
@@ -14,8 +13,7 @@ import {
   addSpacesAsync,
   addSpaceAsync,
   editSpaceAsync,
-  deleteSpaceAsync,
-  selectSpaceAsync
+  deleteSpaceAsync
 } from "./spaceWorkers";
 import {
   addNotesAsync,
@@ -34,8 +32,7 @@ function* spacesSaga() {
     addSpacesSaga(),
     addSpaceSaga(),
     editSpaceSaga(),
-    deleteSpaceSaga(),
-    selectSpaceSaga()
+    deleteSpaceSaga()
   ]);
 }
 
@@ -53,10 +50,6 @@ function* editSpaceSaga() {
 
 function* deleteSpaceSaga() {
   yield takeEvery(DELETE_SPACE, deleteSpaceAsync);
-}
-
-function* selectSpaceSaga() {
-  yield takeLatest(SELECT_SPACE, selectSpaceAsync);
 }
 
 // Note와 관련된 action이 들어올때 처리
