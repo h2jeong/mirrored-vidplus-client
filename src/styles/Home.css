@@ -1,7 +1,7 @@
 .formSpaceAdd {
   width: 100%;
   display: flex;
-  margin: 10px 0;
+  margin: 20px 0 10px;
 }
 .formSpaceAdd input[type="text"] {
   margin-right: 1%;
@@ -29,4 +29,27 @@ a:visited {
 }
 .btnArea {
   text-align: right;
+}
+
+/* search */
+.searchBox {
+  clear: both;
+  width: 100%;
+  height: 45px;
+  background: rgb(230, 230, 240);
+}
+
+.searchBox .ant-input-affix-wrapper {
+  font-size: 20px;
+  width: 100%;
+  height: 100%;
+}
+.searchBox .ant-input-lg {
+  font-size: 14px;
+}
+
+.searchBox .ant-input {
+  border: 0;
+  outline: 0;
+  background: transparent;
 }

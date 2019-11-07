@@ -4,6 +4,7 @@ import {
   EDIT_SPACE,
   DELETE_SPACE,
   SELECT_SPACE,
+  SEARCH_SPACE,
   ADD_NOTES,
   ADD_NOTE,
   EDIT_NOTE,
@@ -33,6 +34,10 @@ export function deleteSpace(id) {
 
 export function selectSpace(id) {
   return { type: SELECT_SPACE, id };
+}
+
+export function searchSpace(searchTerm) {
+  return { type: SEARCH_SPACE, searchTerm };
 }
 
 export function addNotes(spaceId) {
