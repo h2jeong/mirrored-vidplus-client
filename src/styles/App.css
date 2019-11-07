@@ -33,6 +33,27 @@
   left: -30px;
 }
 
+.ant-modal-header {
+  display: flex;
+  align-items: center;
+  height: 70px;
+}
+
+.ant-modal-header #rcDialogTitle1 {
+  font-size: 25px;
+  font-weight: 300;
+  letter-spacing: 1.2px;
+}
+
+.profile-label {
+  padding-top: 4px;
+  height: 32px;
+  color: grey;
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
 #root {
   background-color: rgb(8, 21, 38);
   border: 0.1px solid rgb(8, 21, 38);
