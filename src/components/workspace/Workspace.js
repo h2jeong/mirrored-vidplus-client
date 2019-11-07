@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Title from "./Title";
 import VideoPlayer from "./VideoPlayer";
-// import NoteList from "./NoteList";
+import NoteList from "./NoteList";
 import NoteInput from "./NoteInput";
+import Error from "../shared/Error";
 import "../../styles/Workspace.css";
 import { connect } from "react-redux";
 import { selectSpace, addNotes } from "../../actions/creators";
@@ -12,6 +13,7 @@ const { Content } = Layout;
 // 들어오는 url (path)에 따라 redux의 current space를 업데이트
 function updateCurrSpace(path, props) {
   const currSpace = props.spaces.filter(space => space.name === path)[0];
+  // If the given path is actually valid, update the store
   if (currSpace) {
     props.selectSpace(currSpace.id); // select the current space
     // 비동기로 처리되는 함수여서 currSpace의 current속성이 바로 true가 안될수도 있다
@@ -22,9 +24,10 @@ function updateCurrSpace(path, props) {
 class Workspace extends Component {
   constructor(props) {
     super(props);
+    this.state = { initialRender: true };
     const { spaceName } = this.props.match.params;
-    // Update the current space (or use {validPath: false} to return 404 page)
-    updateCurrSpace.call(this, spaceName, props);
+    // Update the current space (or return 404 page)
+    updateCurrSpace(spaceName, props);
   }
 
   componentDidUpdate(prevProps) {
@@ -35,7 +38,8 @@ class Workspace extends Component {
     // First conditional determines whether the current space (url) has been changed
     // Second conditional handles async fetching (b/c props.spaces is initially an empty arr)
     if (updateNeeded) {
-      updateCurrSpace.call(this, spaceName, this.props);
+      updateCurrSpace(spaceName, this.props);
+      this.setState({ initialRender: false });
     }
   }
 
@@ -55,14 +59,19 @@ class Workspace extends Component {
                 <VideoPlayer currSpace={currSpace} />
                 <NoteInput currSpace={currSpace} />
               </Col>
-              <Col span={12}>{/* <NoteList currSpace={currSpace} /> */}</Col>
+              <Col span={12}>
+                <NoteList currSpace={currSpace} />
+              </Col>
             </Row>
           </Content>
         </Layout>
       );
+    } else if (this.state.initialRender) {
+      // ensure that the error page does not flash by for valid url
+      return null;
     } else {
       // The URL does not correspond to a workspace
-      return <div>404: Workspace Not Found</div>;
+      return <Error history={this.props.history} />;
     }
   }
 }
