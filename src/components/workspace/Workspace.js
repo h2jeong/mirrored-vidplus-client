@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Title from "./Title";
 import VideoPlayer from "./VideoPlayer";
-// import NoteList from "./NoteList";
+import NoteList from "./NoteList";
 import NoteInput from "./NoteInput";
 import Error from "../shared/Error";
 import "../../styles/Workspace.css";
@@ -59,7 +59,9 @@ class Workspace extends Component {
                 <VideoPlayer currSpace={currSpace} />
                 <NoteInput currSpace={currSpace} />
               </Col>
-              <Col span={12}>{/* <NoteList currSpace={currSpace} /> */}</Col>
+              <Col span={12}>
+                <NoteList currSpace={currSpace} />
+              </Col>
             </Row>
           </Content>
         </Layout>
