@@ -41,8 +41,31 @@ class Note extends Component {
           value={this.state.content}
           autoSize
         />
-        <Button type="primary" shape="circle" onClick={this.deleteNote}>
-          <Icon type="delete" style={{ marginLeft: "7.5px" }}></Icon>
+        <Button
+          type="button"
+          style={{
+            marginRight: 0,
+            borderRadius: "3px 0px 0px 3px",
+            borderRight: 0,
+            width: "10px"
+          }}
+        >
+          <img
+            alt=""
+            src={require("../../styles/editTime.png")}
+            style={{ width: "16px", marginLeft: "-7px", opacity: 0.8 }}
+          />
+        </Button>
+        <Button
+          type="button"
+          style={{
+            marginLeft: 0,
+            borderRadius: "0px 3px 3px 0px",
+            width: "10px"
+          }}
+          onClick={this.deleteNote}
+        >
+          <Icon type="delete" style={{ marginLeft: "-7px" }}></Icon>
         </Button>
       </div>
     );
