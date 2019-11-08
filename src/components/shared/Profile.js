@@ -130,6 +130,7 @@ export default class Profile extends Component {
         onCancel={this.props.closeProfile}
         closable={false}
         maskClosable={false}
+        wrapClassName="profile-modal"
         destroyOnClose
         centered
       >
