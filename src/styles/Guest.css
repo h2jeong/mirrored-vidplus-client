@@ -75,7 +75,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.ant-carousel .slick-slide {
+.findpw-modal .ant-carousel .slick-slide {
   text-align: center;
   border-radius: 5px 5px 0 0;
   padding: 20px;
@@ -85,17 +85,17 @@
   overflow: hidden;
 }
 
-.ant-modal-content {
+.findpw-modal .ant-modal-content {
   background-color: rgb(35, 40, 60);
   border-radius: 5px;
 }
 
-.ant-modal-footer {
+.findpw-modal .ant-modal-footer {
   border: 0;
   padding: 0 20px 20px 20px;
 }
 
-.ant-modal-footer button {
+.findpw-modal .ant-modal-footer button {
   border-radius: 2px;
   background-color: rgb(25, 30, 45);
   border: 0.5px solid rgb(70, 70, 70);
@@ -103,6 +103,28 @@
   font-weight: 100;
 }
 
-.ant-modal-footer .ant-btn-primary {
+.findpw-modal .ant-modal-footer .ant-btn-primary {
   border: 0.5px solid rgb(65, 70, 120);
+}
+
+.email-sent {
+  text-align: center;
+}
+
+.email-sent h1 {
+  position: absolute;
+  font-size: 40px;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.email-sent h3 {
+  position: absolute;
+  font-weight: 100;
+  color: white;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
 }

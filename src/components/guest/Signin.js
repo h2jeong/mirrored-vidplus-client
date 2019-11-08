@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "../../styles/Guest.css";
 import api from "../../api";
 import { Icon, Input, Button } from "antd";
 import FindPassword from "./FindPassword";
@@ -20,7 +21,6 @@ class Signin extends Component {
   }
 
   signIn() {
-    // alert("Email : " + this.state.email + " Password : ", this.state.password);
     const { email, password } = this.state;
     if (email === "") {
       this.setState({
@@ -65,8 +65,6 @@ class Signin extends Component {
   }
 
   render() {
-    // const { from } = location.state || { from: { pathname: "/" } };
-    // if (isSignedIn) return <Redirect to={from} />;
     if (this.props.authenticated) {
       this.props.history.push("/home");
     }
