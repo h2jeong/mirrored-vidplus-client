@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Signout from "../shared/Signout";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Typography, Select, Col, PageHeader } from "antd";
+import { Typography, Select, Col, PageHeader, Button } from "antd";
 import { Link } from "react-router-dom";
+import api from "../../api";
 const { Option } = Select;
 const Heading = Typography.Title;
 
@@ -45,6 +46,18 @@ class Title extends Component {
       return (
         <div style={{ position: "relative" }}>
           <div style={{ position: "absolute", right: "0" }}>
+            <Button
+              onClick={() => {
+                api("auth/docs", "POST", this.props.currSpace)
+                  .then(
+                    () => (window.location = "http://localhost:5000/auth/docs")
+                  )
+                  .catch(err => alert(err.message));
+              }}
+              style={{ zIndex: 999 }}
+            >
+              Export Doc
+            </Button>
             <Signout changeAuthState={this.props.changeAuthState} />
           </div>
           <PageHeader breadcrumb={{ itemRender, routes }}>

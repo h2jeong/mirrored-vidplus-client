@@ -52,6 +52,7 @@ class Workspace extends Component {
           <Content style={{ background: "white", padding: "16px 24px" }}>
             <Title
               spaceName={this.props.match.params.spaceName}
+              currSpace={currSpace}
               changeAuthState={this.props.changeAuthState}
             />
             <Row gutter={[16, 16]}>
