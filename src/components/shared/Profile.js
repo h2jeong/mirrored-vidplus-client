@@ -5,7 +5,7 @@ import api from "../../api";
 export default class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", email: "" };
+    this.state = { username: "", email: "", oauth_signup: false };
     this.state["current password"] = "";
     this.state["new password"] = "";
     this.state["confirm password"] = "";
@@ -18,8 +18,9 @@ export default class Profile extends Component {
     // 처음 생성될 때, 이메일이랑 유저 이름만 설정해서 넣어줌
     api("user", "GET")
       .then(res => {
-        const { name, email } = res;
-        this.setState({ username: name, email });
+        let { name, email, oauth_signup } = res;
+        oauth_signup = !!oauth_signup; // boolean값으로 변환
+        this.setState({ username: name, email, oauth_signup });
       })
       .catch(error => alert(error.message));
   }
@@ -35,9 +36,10 @@ export default class Profile extends Component {
           for (const field of fields) {
             newState[field] = "";
           }
-          // Reset name & email to the API call result
-          const { name, email } = res;
-          this.setState({ ...newState, username: name, email });
+          // Reset name, email, oauth_signup to the API call result
+          let { name, email, oauth_signup } = res;
+          oauth_signup = !!oauth_signup; // boolean값으로 변환
+          this.setState({ ...newState, username: name, email, oauth_signup });
         })
         .catch(error => alert(error.message));
     }
@@ -49,7 +51,7 @@ export default class Profile extends Component {
   }
 
   onSave() {
-    // 저장 버튼이 눌러졌을 때 실행되는 함수
+    // 저장 버튼이 눌러졌을 때 실행되는 함수 (OAuth 회원이 아닐때)
     api("user", "GET")
       .then(res => {
         const email = res.email;
@@ -120,13 +122,19 @@ export default class Profile extends Component {
       borderBottom: "1px solid rgb(180, 180, 180)",
       borderRadius: "2px"
     };
-    const inputFields = Object.keys(this.state);
+    const inputFields = [
+      "username",
+      "email",
+      "current password",
+      "new password",
+      "confirm password"
+    ];
     return (
       <Modal
         title="Account Setting"
         visible={this.props.visible}
         okText="Save"
-        onOk={this.onSave}
+        onOk={this.state.oauth_signup ? this.props.closeProfile : this.onSave}
         onCancel={this.props.closeProfile}
         closable={false}
         maskClosable={false}
@@ -134,6 +142,11 @@ export default class Profile extends Component {
         destroyOnClose
         centered
       >
+        {this.state.oauth_signup && (
+          <div style={{ marginBottom: "20px" }}>
+            Info cannot be edited because user is logged in via a third party.
+          </div>
+        )}
         {inputFields.map((field, i) => (
           <Row
             style={{
@@ -151,6 +164,7 @@ export default class Profile extends Component {
                   data-field={field}
                   value={this.state[field]}
                   onChange={this.onChange}
+                  disabled={this.state.oauth_signup}
                 />
               ) : (
                 // Input.Password is not stylable, so specify text security
@@ -168,6 +182,7 @@ export default class Profile extends Component {
                   })()}
                   value={this.state[field]}
                   onChange={this.onChange}
+                  disabled={this.state.oauth_signup}
                 />
               )}
             </Col>
