@@ -45,7 +45,8 @@
   border-color: #056d5d;
 }
 .linkTo {
-  text-align: right;
+  position: relative;
+  margin-top: 15px;
   font-size: 1.2em;
 }
 .linkTo a,

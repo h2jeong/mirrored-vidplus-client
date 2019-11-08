@@ -111,14 +111,17 @@ class Signin extends Component {
               icon="google"
               href="http://metawig.com:8080/auth/google"
             >
-              Signin with google
+              Sign in with Google
             </Button>
             {/* <Button size="small" icon="facebook" href="#">
               Signin with facebook
             </Button> */}
           </div>
           <div className="linkTo">
-            <Link to="/signup">{"Signup"}</Link>
+            <Link>Forgot Password?</Link>
+            <Link to="/signup" style={{ position: "absolute", right: 0 }}>
+              Sign up
+            </Link>
           </div>
         </div>
       </div>
