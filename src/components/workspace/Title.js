@@ -13,6 +13,7 @@ class Title extends Component {
     super(props);
     this.state = { shouldRedirect: false };
     this.onSpaceChange = this.onSpaceChange.bind(this);
+    this.exportToDocs = this.exportToDocs.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -32,6 +33,14 @@ class Title extends Component {
     }
   }
 
+  exportToDocs() {
+    api("auth/docs", "POST", this.props.currSpace)
+      // If current space ID is successfully saved in the session, move to 동의 페이지
+      .then(() => (window.location = "http://localhost:5000/auth/docs"))
+      // Else, alert what went wrong in the POST request
+      .catch(error => alert(error.message));
+  }
+
   render() {
     if (this.state.shouldRedirect) {
       // Should redirect to the new given path
@@ -46,17 +55,13 @@ class Title extends Component {
       return (
         <div style={{ position: "relative" }}>
           <div style={{ position: "absolute", right: "0" }}>
-            <Button
-              onClick={() => {
-                api("auth/docs", "POST", this.props.currSpace)
-                  .then(
-                    () => (window.location = "http://localhost:5000/auth/docs")
-                  )
-                  .catch(err => alert(err.message));
-              }}
-              style={{ zIndex: 999 }}
-            >
-              Export Doc
+            <Button className="export-docs" onClick={this.exportToDocs}>
+              <img
+                className="docs-icon"
+                alt=""
+                src={require("../../styles/docs.png")}
+              />
+              Export To Docs
             </Button>
             <Signout changeAuthState={this.props.changeAuthState} />
           </div>

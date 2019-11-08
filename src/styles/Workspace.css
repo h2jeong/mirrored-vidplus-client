@@ -50,3 +50,21 @@
   margin-left: 2px;
   margin-right: 15px;
 }
+
+@media all and (max-width: 40em) {
+  .export-docs {
+    display: none;
+  }
+}
+
+.export-docs {
+  padding-left: 13px;
+  z-index: 999;
+  margin-right: 10px;
+}
+
+.export-docs .docs-icon {
+  margin-top: -2px;
+  margin-right: 5px;
+  width: 17px;
+}
