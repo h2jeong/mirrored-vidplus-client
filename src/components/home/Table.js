@@ -15,6 +15,7 @@ class Table extends Component {
     const itemRender = route => (
       <Link to={route.path}>{route.breadcrumbName}</Link>
     );
+
     return (
       <div>
         <Col span={14}>

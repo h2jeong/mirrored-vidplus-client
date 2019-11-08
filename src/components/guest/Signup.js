@@ -33,9 +33,9 @@ class Signup extends Component {
   //     });
   // }
 
+  // 유저 입력값 유효성 검사
   vaildCheck() {
     let result = true;
-
     const { name, email, password, passwordAgain } = this.state;
 
     const passwordReg = /^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*_-]).{8,12}$/g;

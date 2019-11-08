@@ -8,8 +8,8 @@ class SpaceAdder extends Component {
     super(props);
     this.duplicateCheck = this.duplicateCheck.bind(this);
     this.vaildCheck = this.vaildCheck.bind(this);
-    this.handleNameChange = this.handleNameChange.bind(this);
     this.handleUrlChange = this.handleUrlChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       url: "",
@@ -17,18 +17,25 @@ class SpaceAdder extends Component {
       txtWarning: ""
     };
   }
+
+  // 중복된 이름 추가 체크
   duplicateCheck(name) {
     const { spaces } = this.props;
     let result = true;
+
     for (let i = 0; i < spaces.length; i++) {
       if (spaces[i].name === name) return false;
     }
+
     return result;
   }
+
+  // 입력값 유효성 검사
   vaildCheck() {
     let result = true;
     const { url, name } = this.state;
     const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{1,30}$/g;
+
     if (name === "") {
       this.setState({
         txtWarning: "Workspace 이름을 입력해주세요"
@@ -46,11 +53,18 @@ class SpaceAdder extends Component {
       result = false;
     }
 
-    //const urlReg = /(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
+    /*
+    일반 사이트 정규 표현식
+    const urlReg = /(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
+    적용한 동영상 사이트 정규표현식 [유튜브1, 유튜브2, 비데오, 페이스북, 데일리모션]
+    */
+
     const urlRegs = [
       /https?:\/\/youtu.be\/([a-zA-Z0-9\-_]+)/gi,
       /https?:\/\/www.youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)/gi,
-      /(https?:\/\/)?(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/gi
+      /(https?:\/\/)?(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/gi,
+      /^(?:(?:https?:)?\/\/)?(?:www\.)?facebook\.com\/[a-zA-Z0-9\.]+\/videos\/(?:[a-zA-Z0-9\.]+\/)?([0-9]+)/,
+      /^.+dailymotion.com\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/
     ];
 
     if (url === "") {
@@ -61,7 +75,9 @@ class SpaceAdder extends Component {
     } else if (
       !urlRegs[0].test(url) &&
       !urlRegs[1].test(url) &&
-      !urlRegs[2].test(url)
+      !urlRegs[2].test(url) &&
+      !urlRegs[3].test(url) &&
+      !urlRegs[4].test(url)
     ) {
       this.setState({
         txtWarning: "url 형식에 맞게 입력해주세요",
@@ -80,13 +96,13 @@ class SpaceAdder extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
+
     if (this.vaildCheck()) {
       const { url, name } = this.state;
       const space = { url, name };
-
       const { addSpace } = this.props;
-      addSpace(space);
 
+      addSpace(space);
       this.setState({ url: "", name: "" });
     }
   }

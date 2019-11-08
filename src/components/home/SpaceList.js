@@ -17,8 +17,8 @@ const SpaceList = ({ spaces }) => {
         {/* <caption>Work Spaces</caption> */}
         <colgroup>
           <col width="45%" />
-          <col width="20%" />
-          <col width="20%" />
+          <col width="15%" />
+          <col width="25%" />
           <col width="" />
         </colgroup>
         <tbody>{spaceList}</tbody>

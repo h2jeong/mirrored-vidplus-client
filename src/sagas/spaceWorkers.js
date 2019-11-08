@@ -29,12 +29,11 @@ export function* addSpaceAsync(action) {
 
 export function* editSpaceAsync(action) {
   try {
-    const { id, name } = action;
-    const editedSpace = yield call(api, `spaces/${id}`, "PUT", { name });
+    const space = action.space;
+    const editedSpace = yield call(api, `spaces/${space.id}`, "PUT", space);
     yield put({
       type: EDIT_SPACE_ASYNC,
-      name: editedSpace.name,
-      id: id
+      space: editedSpace
     });
   } catch (error) {
     yield put({ type: ADD_ERROR, error });
