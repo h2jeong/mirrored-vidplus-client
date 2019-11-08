@@ -26,7 +26,26 @@ class Table extends Component {
           <Signout changeAuthState={this.props.changeAuthState} />
         </Col>
         <SpaceAdder />
-        <SpaceList spaces={spaces} />
+        {!spaces || spaces.length === 0 ? (
+          <div style={{ textAlign: "center", marginTop: "10%" }}>
+            <img
+              alt=""
+              src={require("../../styles/empty.png")}
+              style={{ width: "200px" }}
+            />
+            <h2
+              style={{
+                fontWeight: 300,
+                marginTop: "15px",
+                color: "rgb(70, 70, 70)"
+              }}
+            >
+              You have no Workspaces.
+            </h2>
+          </div>
+        ) : (
+          <SpaceList spaces={spaces} />
+        )}
       </div>
     );
   }
