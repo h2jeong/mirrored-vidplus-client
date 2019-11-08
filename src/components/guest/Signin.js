@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "../../api";
 import { Icon, Input, Button } from "antd";
+import FindPassword from "./FindPassword";
 
 class Signin extends Component {
   constructor(props) {
@@ -9,10 +10,12 @@ class Signin extends Component {
     this.signIn = this.signIn.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePWChange = this.handlePWChange.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.state = {
       email: "",
       password: "",
-      txtWarning: ""
+      txtWarning: "",
+      showModal: false
     };
   }
 
@@ -57,6 +60,10 @@ class Signin extends Component {
     this.setState({ password: e.target.value });
   }
 
+  toggleModal() {
+    this.setState({ showModal: !this.state.showModal });
+  }
+
   render() {
     // const { from } = location.state || { from: { pathname: "/" } };
     // if (isSignedIn) return <Redirect to={from} />;
@@ -65,6 +72,10 @@ class Signin extends Component {
     }
     return (
       <div className="bgGuest">
+        <FindPassword
+          visible={this.state.showModal}
+          toggleModal={this.toggleModal}
+        />
         <div className="welcomeRight">
           <form className="form-signin">
             <Input
@@ -118,7 +129,9 @@ class Signin extends Component {
             </Button> */}
           </div>
           <div className="linkTo">
-            <Link>Forgot Password?</Link>
+            <Link to="/signin" onClick={this.toggleModal}>
+              Forgot Password?
+            </Link>
             <Link to="/signup" style={{ position: "absolute", right: 0 }}>
               Sign up
             </Link>
