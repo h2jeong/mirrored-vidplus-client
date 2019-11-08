@@ -3,6 +3,7 @@ export const ADD_SPACE = "ADD_SPACE";
 export const EDIT_SPACE = "EDIT_SPACE";
 export const DELETE_SPACE = "DELETE_SPACE";
 export const SELECT_SPACE = "SELECT_SPACE";
+export const SEARCH_SPACE = "SEARCH_SPACE";
 
 export const ADD_NOTES = "ADD_NOTES";
 export const ADD_NOTE = "ADD_NOTE";
