@@ -78,7 +78,8 @@ class Navigation extends Component {
     const menuItemStyle = {
       display: "flex",
       alignItems: "center",
-      height: "60px"
+      height: "60px",
+      marginTop: "0px"
     };
 
     if (this.state.redirect.awaiting) {
