@@ -16,8 +16,13 @@ export default function spaces(state = [], action) {
       return [...state, { ...action.space, current: false }];
     case EDIT_SPACE_ASYNC:
       return state.map(space => {
-        // PREVIOUS CODE: return space.current ? { ...space, name: action.name } : space;
-        return space.id === action.id ? { ...space, name: action.name } : space;
+        return space.id === action.space.id
+          ? {
+              ...space,
+              name: action.space.name,
+              updatedAt: action.space.updatedAt
+            }
+          : space;
       });
     case DELETE_SPACE_ASYNC:
       return state.filter(space => space.id !== action.id);

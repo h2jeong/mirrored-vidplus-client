@@ -24,6 +24,7 @@ class SpaceEntry extends Component {
   }
   componentDidMount() {
     const { space } = this.props;
+
     api(`notes?space_id=${space.id}`, "GET")
       .then(data => {
         this.setState({ noteLength: data.length });
@@ -41,14 +42,20 @@ class SpaceEntry extends Component {
       spaceName: name
     });
   }
+
+  // 스페이스네임 중복 검사
   duplicateCheck(name) {
     const { spaces } = this.props;
     let result = true;
+
     for (let i = 0; i < spaces.length; i++) {
       if (spaces[i].name === name) return false;
     }
+
     return result;
   }
+
+  // 스페이스네임 유효성 검사
   validateName(name) {
     let result = true;
     const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{1,30}$/g;
@@ -74,10 +81,12 @@ class SpaceEntry extends Component {
       this.setState({ spaceName: e.target.value });
     }
   }
-  handleEdit(id) {
+  handleEdit(space) {
     const { spaceName } = this.state;
     const { editSpace } = this.props;
-    editSpace(spaceName, id);
+    space.name = spaceName;
+
+    editSpace(space);
     this.setState({
       editMode: false,
       spaceName: ""
@@ -98,7 +107,7 @@ class SpaceEntry extends Component {
         <Button
           type="button"
           size="small"
-          onClick={() => this.handleEdit(space.id)}
+          onClick={() => this.handleEdit(space)}
           icon="check"
           shape="circle"
         />
@@ -140,7 +149,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteSpace: id => dispatch(deleteSpace(id)),
-    editSpace: (name, id) => dispatch(editSpace(name, id))
+    editSpace: space => dispatch(editSpace(space))
   };
 };
 SpaceEntry = connect(

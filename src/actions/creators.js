@@ -24,8 +24,8 @@ export function addSpace(space) {
   return { type: ADD_SPACE, space };
 }
 
-export function editSpace(name, id) {
-  return { type: EDIT_SPACE, name, id };
+export function editSpace(space) {
+  return { type: EDIT_SPACE, space };
 }
 
 export function deleteSpace(id) {

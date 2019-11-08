@@ -17,8 +17,8 @@ class Signin extends Component {
   }
 
   signIn() {
-    // alert("Email : " + this.state.email + " Password : ", this.state.password);
     const { email, password } = this.state;
+
     if (email === "") {
       this.setState({
         txtWarning: "이메일을 입력해주세요."
@@ -58,11 +58,10 @@ class Signin extends Component {
   }
 
   render() {
-    // const { from } = location.state || { from: { pathname: "/" } };
-    // if (isSignedIn) return <Redirect to={from} />;
     if (this.props.authenticated) {
       this.props.history.push("/home");
     }
+
     return (
       <div className="bgGuest">
         <div className="welcomeRight">
@@ -105,6 +104,7 @@ class Signin extends Component {
             </Button>
             <p className="txtWarning">{this.state.txtWarning}</p>
           </form>
+          {/* 쇼설 로그인 영역 */}
           <div className="social">
             <Button
               size="small"
