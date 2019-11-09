@@ -1,5 +1,5 @@
 // 서버 주소
-const server = "http://localhost:5000";
+const server = "http://metawig.com:8080";
 
 export default function api(url, method, body) {
   return fetch(`${server}/${url}`, {

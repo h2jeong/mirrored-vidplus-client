@@ -36,7 +36,7 @@ class Title extends Component {
   exportToDocs() {
     api("auth/docs", "POST", this.props.currSpace)
       // If current space ID is successfully saved in the session, move to 동의 페이지
-      .then(() => (window.location = "http://localhost:5000/auth/docs"))
+      .then(() => (window.location = "http://metawig.com:8080/auth/docs"))
       // Else, alert what went wrong in the POST request
       .catch(error => alert(error.message));
   }
