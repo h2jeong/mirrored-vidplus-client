@@ -111,16 +111,16 @@ class Navigation extends Component {
             <Menu.Item key="3" style={menuItemStyle}>
               <Icon type="user" style={this.state.iconStyle} />
               <span style={{ paddingLeft: "3px" }}>My Info</span>
-              <Profile
-                visible={this.state.showProfile}
-                closeProfile={this.closeProfile}
-              />
             </Menu.Item>
           </Menu>
           <img
             alt=""
             className="nav-logo"
             src={require("../../styles/ci.png")}
+          />
+          <Profile
+            visible={this.state.showProfile}
+            closeProfile={this.closeProfile}
           />
         </Sider>
       );
