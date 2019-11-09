@@ -78,7 +78,7 @@ export default class Profile extends Component {
           }
         }
       })
-      .then(() => this.props.closeProfile())
+      .then(this.props.closeProfile)
       .catch(error => {
         if (error.status === 401) {
           // Case for sign-in error (POST request body is incorrect)
@@ -129,6 +129,8 @@ export default class Profile extends Component {
         onOk={this.onSave}
         onCancel={this.props.closeProfile}
         closable={false}
+        maskClosable={false}
+        wrapClassName="profile-modal"
         destroyOnClose
         centered
       >

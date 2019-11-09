@@ -33,19 +33,21 @@
   left: -30px;
 }
 
-.ant-modal-header {
+.profile-modal .ant-modal-header {
   display: flex;
   align-items: center;
   height: 70px;
 }
 
-.ant-modal-header #rcDialogTitle1 {
+.profile-modal .ant-modal-header .ant-modal-title {
   font-size: 25px;
   font-weight: 300;
   letter-spacing: 1.2px;
 }
 
+.findpw-label,
 .profile-label {
+  text-align: left;
   padding-top: 4px;
   height: 32px;
   color: grey;

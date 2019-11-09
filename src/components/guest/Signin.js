@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "../../styles/Guest.css";
 import api from "../../api";
 import { Icon, Input, Button } from "antd";
+import FindPassword from "./FindPassword";
 
 class Signin extends Component {
   constructor(props) {
@@ -9,10 +11,12 @@ class Signin extends Component {
     this.signIn = this.signIn.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePWChange = this.handlePWChange.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.state = {
       email: "",
       password: "",
-      txtWarning: ""
+      txtWarning: "",
+      showModal: false
     };
   }
 
@@ -57,6 +61,10 @@ class Signin extends Component {
     this.setState({ password: e.target.value });
   }
 
+  toggleModal() {
+    this.setState({ showModal: !this.state.showModal });
+  }
+
   render() {
     if (this.props.authenticated) {
       this.props.history.push("/home");
@@ -64,6 +72,10 @@ class Signin extends Component {
 
     return (
       <div className="bgGuest">
+        <FindPassword
+          visible={this.state.showModal}
+          toggleModal={this.toggleModal}
+        />
         <div className="welcomeRight">
           <form className="form-signin">
             <Input
@@ -111,14 +123,19 @@ class Signin extends Component {
               icon="google"
               href="http://metawig.com:8080/auth/google"
             >
-              Signin with google
+              Sign in with Google
             </Button>
             {/* <Button size="small" icon="facebook" href="#">
               Signin with facebook
             </Button> */}
           </div>
           <div className="linkTo">
-            <Link to="/signup">{"Signup"}</Link>
+            <Link to="/signin" onClick={this.toggleModal}>
+              Forgot Password?
+            </Link>
+            <Link to="/signup" style={{ position: "absolute", right: 0 }}>
+              Sign up
+            </Link>
           </div>
         </div>
       </div>

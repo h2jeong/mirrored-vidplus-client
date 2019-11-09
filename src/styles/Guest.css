@@ -18,6 +18,7 @@
 .form-signin .txtWarning {
   color: rgba(18, 197, 137, 0.5);
 }
+.findpw-input,
 .form-signin input {
   color: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -45,7 +46,8 @@
   border-color: #056d5d;
 }
 .linkTo {
-  text-align: right;
+  position: relative;
+  margin-top: 15px;
   font-size: 1.2em;
 }
 .linkTo a,
@@ -71,4 +73,58 @@
   color: rgba(217, 247, 190, 0.8);
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.findpw-modal .ant-carousel .slick-slide {
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+  padding: 20px;
+  height: 400px;
+  line-height: 50px;
+  background: rgb(35, 40, 60);
+  overflow: hidden;
+}
+
+.findpw-modal .ant-modal-content {
+  background-color: rgb(35, 40, 60);
+  border-radius: 5px;
+}
+
+.findpw-modal .ant-modal-footer {
+  border: 0;
+  padding: 0 20px 20px 20px;
+}
+
+.findpw-modal .ant-modal-footer button {
+  border-radius: 2px;
+  background-color: rgb(25, 30, 45);
+  border: 0.5px solid rgb(70, 70, 70);
+  color: rgb(220, 220, 220);
+  font-weight: 100;
+}
+
+.findpw-modal .ant-modal-footer .ant-btn-primary {
+  border: 0.5px solid rgb(65, 70, 120);
+}
+
+.email-sent {
+  text-align: center;
+}
+
+.email-sent h1 {
+  position: absolute;
+  font-size: 40px;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.email-sent h3 {
+  position: absolute;
+  font-weight: 100;
+  color: white;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
 }
