@@ -2,14 +2,9 @@ import React from "react";
 import SpaceEntry from "./SpaceEntry";
 
 const SpaceList = ({ spaces }) => {
-  const spaceList =
-    spaces === undefined || spaces.length < 1 ? (
-      <tr>
-        <td colSpan="4">{"There is no WorkSpace"}</td>
-      </tr>
-    ) : (
-      spaces.map(space => <SpaceEntry space={space} key={space.id} />)
-    );
+  const spaceList = spaces.map(space => (
+    <SpaceEntry space={space} key={space.id} />
+  ));
 
   return (
     <div>
