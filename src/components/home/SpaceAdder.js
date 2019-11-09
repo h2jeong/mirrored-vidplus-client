@@ -89,10 +89,10 @@ class SpaceAdder extends Component {
     return result;
   }
   handleUrlChange(e) {
-    this.setState({ url: e.target.value });
+    this.setState({ txtWarning: "", url: e.target.value });
   }
   handleNameChange(e) {
-    this.setState({ name: e.target.value });
+    this.setState({ txtWarning: "", name: e.target.value });
   }
   handleSubmit(e) {
     e.preventDefault();

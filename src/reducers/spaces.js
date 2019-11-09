@@ -3,8 +3,7 @@ import {
   ADD_SPACE_ASYNC,
   EDIT_SPACE_ASYNC,
   DELETE_SPACE_ASYNC,
-  SELECT_SPACE,
-  SEARCH_SPACE
+  SELECT_SPACE
 } from "../actions/types";
 
 export default function spaces(state = [], action) {
@@ -39,16 +38,6 @@ export default function spaces(state = [], action) {
         }
         // PREVIOUS CODE: return space.id  === action.id ? { ...space, current: true } : space;
       });
-    case SEARCH_SPACE:
-      return action.searchTerm !== ""
-        ? state.filter(
-            space =>
-              space.name
-                .toLowerCase()
-                .indexOf(action.searchTerm.toLowerCase()) > -1
-          )
-        : state;
-
     default:
       return state;
   }

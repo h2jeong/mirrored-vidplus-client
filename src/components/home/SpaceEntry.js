@@ -39,7 +39,8 @@ class SpaceEntry extends Component {
   handleToggle(name) {
     this.setState({
       editMode: !this.state.editMode,
-      spaceName: name
+      spaceName: name,
+      newSpaceName: ""
     });
   }
 
@@ -61,10 +62,10 @@ class SpaceEntry extends Component {
     const nameReg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|._\-|*]{1,30}$/g;
 
     if (name === "") {
-      alert("Workspace 이름을 입력해주세요");
+      this.setState({ name: this.state.spaceName });
       result = false;
     } else if (!nameReg.test(name)) {
-      alert("빈칸 없이 텍스트로 입력해주세요");
+      alert("빈칸 없이 텍스트로 입력해주세요. ex)abc.1_가-ABC");
       this.setState({ name: this.state.spaceName });
       result = false;
     } else if (!this.duplicateCheck(name)) {
@@ -75,21 +76,21 @@ class SpaceEntry extends Component {
     return result;
   }
   handleNameChange(e) {
-    if (!this.validateName(e.target.value)) {
-      e.target.value = this.state.spaceName;
-    } else {
-      this.setState({ spaceName: e.target.value });
-    }
+    this.setState({ newSpaceName: e.target.value });
   }
   handleEdit(space) {
-    const { spaceName } = this.state;
-    const { editSpace } = this.props;
-    space.name = spaceName;
+    const { newSpaceName } = this.state;
 
-    editSpace(space);
+    if (this.validateName(newSpaceName)) {
+      this.setState({ spaceName: newSpaceName });
+
+      const { editSpace } = this.props;
+      space.name = newSpaceName;
+      editSpace(space);
+    }
     this.setState({
       editMode: false,
-      spaceName: ""
+      newSpaceName: ""
     });
   }
 
