@@ -80,19 +80,12 @@ class SpaceEntry extends Component {
   }
   handleEdit(space) {
     const { newSpaceName } = this.state;
-    console.log(
-      "spaceName::",
-      this.state.spaceName,
-      "newSpaceName::",
-      newSpaceName
-    );
+
     if (this.validateName(newSpaceName)) {
       this.setState({ spaceName: newSpaceName });
 
-      console.log("1 space::", space);
       const { editSpace } = this.props;
       space.name = newSpaceName;
-      console.log("2 space::", space);
       editSpace(space);
     }
     this.setState({
