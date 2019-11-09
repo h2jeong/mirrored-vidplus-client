@@ -88,7 +88,7 @@ class Note extends Component {
             className="note-timestamp"
             value={this.state.timestamp}
             onChange={this.onTimestampChange}
-            onEnter={this.toggleTimestamp}
+            onPressEnter={this.toggleTimestamp}
           />
         ) : (
           <a href="#" onClick={() => changeTimestamp(note.timestamp)}>
