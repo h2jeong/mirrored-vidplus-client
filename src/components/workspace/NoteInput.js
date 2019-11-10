@@ -66,7 +66,7 @@ class NoteInput extends Component {
             "The timestamp format is not valid. Please follow a MM:SS format."
           );
         if (timestamp.length > 4) {
-          timestamp = timestamp.replace(/^0:?0?/, ""); // remove unnecesary 0s
+          timestamp = timestamp.replace(/^(?:0:0)|^(?:0:)|^0/, ""); // remove unnecesary 0s
         }
       } else {
         timestamp = secondsToTimeStamp(this.props.currTime);

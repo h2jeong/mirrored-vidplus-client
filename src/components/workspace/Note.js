@@ -69,7 +69,7 @@ class Note extends Component {
       } else {
         if (timestamp.length > 4) {
           // remove unnecesary 0s
-          timestamp = timestamp.replace(/^0:?0?/, "");
+          timestamp = timestamp.replace(/^(?:0:0)|^(?:0:)|^0/, "");
         }
         // Update the server / db and make changes in redux
         this.props.editNote({ ...this.props.note, timestamp });
