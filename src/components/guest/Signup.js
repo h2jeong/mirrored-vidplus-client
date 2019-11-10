@@ -101,15 +101,15 @@ class Signup extends Component {
 
           if (status === 400) {
             alert(message);
-          } else if (status === 409) {
-            this.setState({
-              txtWarning: message
-            });
           } else if (status === 500) {
             this.setState({
               txtWarning: message
             });
             alert("고객센터로 문의 바랍니다.");
+          } else {
+            this.setState({
+              txtWarning: message
+            });
           }
         });
     }
