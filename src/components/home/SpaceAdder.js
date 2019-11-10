@@ -120,7 +120,7 @@ class SpaceAdder extends Component {
             size="large"
             value={this.state.url}
             onChange={this.handleUrlChange}
-            placeholder="Paste your URL"
+            placeholder="Paste video URL (YouTube, Vimeo, Facebook, Dailymotion)"
           />
 
           <Input
