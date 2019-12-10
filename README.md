@@ -4,6 +4,8 @@
 
 -------------------------------------------------------
 
-Installation npm install / yarn
+Installation 
+npm install / yarn
 
-Running npm run dev / yarn dev
+Running 
+npm run dev / yarn dev
